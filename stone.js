@@ -3,7 +3,7 @@ class Stone{
 
     var options={
         isStatic:false,
-        restitution:0,
+        restitution:0.8,
         friction:1,
         density:1.2
     }
@@ -16,8 +16,13 @@ class Stone{
 }
 display(){
     var pos =this.body.position;
+
+    push()
+    translate(pos.x, pos.y);
+    rotate(this.body.angle);
+    ellipseMode(RADIUS)
     imageMode(CENTER);
-    image(this.image, this.body.position.x, this.body.position.y,50, 50)
-    rect(pos.x, pos.y, this.r);
+    image(this.image, 0,0,this.r, this.r)
+    pop()
   }
 }

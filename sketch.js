@@ -5,7 +5,7 @@ const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Constraint = Matter.Constraint;
 
-var ground;
+var engine,world;
 var tree;
 var boy;
 var stone;
@@ -28,15 +28,15 @@ function setup() {
 	ground=new Ground(600, 670, 1200, 20)
 //	tree=new Tree(800, 460, 1, 1)
 	boy=new Boy(200, 600, 1, 1)
-	stone=new Stone(120, 535, 50)
+	stone=new Stone(125, 535, 50)
 
-	mango1=new Mango(750, 310, 1, 1)
-	mango2=new Mango(700, 400, 1, 1)
-	mango3=new Mango(820, 380, 1, 1)
-	mango4=new Mango(900, 320, 1, 1)
-	mango5=new Mango(950, 390, 1, 1)
+	mango1=new Mango(790, 130, 50)
+	mango2=new Mango(700, 250, 50)
+	mango3=new Mango(800, 200, 50)
+	mango4=new Mango(900, 250, 50)
+	mango5=new Mango(1000, 250, 50)
 
-	rope=new Rope(stone.body, {x:50, y:535})
+	rope=new Rope(stone.body, {x:120, y:535})
 
 
 	Engine.run(engine);
@@ -46,8 +46,12 @@ function setup() {
 
 function draw() {
   rectMode(CENTER);
-  background(255);
-    image(tree, 800, 460, 200, 200)
+  background(220);
+
+   
+
+
+    image(tree, 850, 350, 500, 600)
 	ground.display();
 	//tree.display();
 	boy.display();
@@ -61,18 +65,44 @@ function draw() {
 
 	rope.display();
 
-
-  drawSprites();
+	text(mouseX+ ":" +mouseY, 50,100)
+  
+	detectollision(stone,mango1);
+	detectollision(stone,mango2);
+	detectollision(stone,mango3);
+	detectollision(stone,mango4);
+	detectollision(stone,mango5);
+	
  
 }
 
 function keyPressed() {
 	if (keyCode === 32){
 		Matter.Body.setPosition(stone.body, {x:120, y:535})
+		rope.attach(stone.body);
 	}
 }
 
 function mouseDragged(){
 	Matter.Body.setPosition(stone.body, {x:mouseX, y:mouseY})
 }
+
+function mouseReleased(){
+	rope.fly()
+}
+
 	
+function detectollision(lstone,lmango){
+
+mangoBodyPosition=lmango.body.position
+stoneBodyPosition=lstone.body.position
+
+var distance = dist(stoneBodyPosition.x, stoneBodyPosition.y, mangoBodyPosition.x, mangoBodyPosition.y)
+
+	if(distance<=lmango.r+lstone.r)
+  {
+	
+	  Matter.Body.setStatic(lmango.body,false);
+  }
+
+}

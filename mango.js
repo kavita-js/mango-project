@@ -16,7 +16,7 @@ class Mango{
 display(){
     var pos =this.body.position;
     imageMode(CENTER);
-    image(this.image, this.body.position.x, this.body.position.y,50, 50)
-    rect(pos.x, pos.y, this.r);
+    image(this.image, pos.x, pos.y,this.r,this.r,)
+    //rect(pos.x, pos.y, this.r);
   }
 }

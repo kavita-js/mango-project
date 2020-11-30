@@ -15,6 +15,6 @@ class Tree {
       var pos =this.body.position;
       imageMode(CENTER);
       image(this.image, this.body.position.x, this.body.position.y,450, 450)
-      rect(pos.x, pos.y, this.width, this.height);
+      
     }
   };
